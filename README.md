@@ -1,3 +1,3 @@
 # opamp_book
 
-LtspiceでOPアンプ回路を理解する
+LTspiceでOPアンプ回路を理解する
