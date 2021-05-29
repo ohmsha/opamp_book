@@ -1,0 +1,13 @@
+Version 4
+SymbolType BLOCK
+LINE Normal 32 -32 -16 -32
+LINE Normal 81 48 32 -32
+RECTANGLE Normal -96 -64 160 64
+TEXT -26 30 Left 2 Chebyshev
+WINDOW 0 8 -72 Bottom 2
+PIN -96 0 LEFT 8
+PINATTR PinName VIN
+PINATTR SpiceOrder 1
+PIN 160 0 RIGHT 8
+PINATTR PinName VOUT
+PINATTR SpiceOrder 2

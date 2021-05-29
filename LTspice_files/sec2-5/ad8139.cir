@@ -1,0 +1,131 @@
+* AD8139 SPICE Macro-model        
+* Description: Amplifier
+* Generic Desc: Fully Differential ADC Driver
+* Developed by:
+* Revision History: 08/10/2012 - Updated to new header style
+* 
+* Copyright 2012 by Analog Devices, Inc.
+*
+* Refer to http://www.analog.com/Analog_Root/static/techSupport/designTools/spiceModels/license/spice_general.html for License Statement. Use of this model 
+* indicates your acceptance of the terms and provisions in the License Statement.
+* 
+* BEGIN Notes:
+*
+* Not Modeled:
+*    
+* Parameters modeled include: 
+* END Notes
+*
+* Node assignments 
+
+.SUBCKT AD8139 INV VOCM VCC VOUTP VOUTN VEE NINV
+
+********** BJT **********  
+.MODEL _Q1IN PNP BF=33 RE=1710
+Q_Q1         14 INV 3 _Q1IN
+Q_Q2         2 5 3 _Q1IN
+Q_Q3         3 10 VCC _Q1IN
+Q_Q4         10 10 VCC _Q1IN
+Q_Q7         18 22 VCC _Q1IN
+Q_Q8         22 22 VCC _Q1IN  
+.MODEL _Q2PCM PNP BF=33 RE=232
+Q_Q5         7 VOCM 18 _Q2PCM
+Q_Q6         8 VOCMN 18 _Q2PCM
+.MODEL _Q3N NPN BF=100 NF=0.8 RE=0  
+Q_Q9         VCC 27 VOUTP _Q3N
+Q_Q11        VCC 1 VOUTN _Q3N
+.MODEL _Q4P PNP BF=100 NF=0.8 RE=0.5   
+Q_Q10        VEE 29 VOUTP _Q4P
+Q_Q12        VEE 26 VOUTN _Q4P
+
+********** Capacitors ********** 
+C_C1         VCM POSDRV  305p IC=0 
+C_C3         VCM NEGDRV  305p IC=0 
+C_C4         0 VCM  207p IC=0 
+C_Cin        INV 5  1.2p 
+C_Ccmrr      VOCMN CMR  2.5p  
+
+********** Resistors **********
+R_R1         VEE 14  10k 
+R_R2         VEE 2  10k 
+R_R3         VCM POSDRV  1.08Meg
+R_R4         VEE 10  180k
+R_R5         VCM NEGDRV  1.08Meg  
+R_R6         VEE 7  10k  
+R_R7         VEE 8  10k                  
+R_R8         VCM 0 1.08Meg   
+R_R9         VOCMN VCM  200  
+R_R10        VCC VOCM  600k
+*R_R11        POSDRV 1X1  1n  
+*R_R12        NEGDRV 1X2  1n 
+V_VR11        POSDRV 1X1 0 
+V_VR12	     NEGDRV 1X2 0	
+*R_R13        30 2X1  1n   
+*R_R14        11 2X2  1n  
+V_VR13        30 2X1  0
+V_VR14        11 2X2  0
+R_R15	     VCM VOUTP 500
+R_R16        VOUTN VCM 500 	
+R_Ricc       VEE VCC  1.666k  
+R_Rcmrr      CMR INV  5k  
+  
+********** Voltage Sources **********  
+V_V4         31 30 -2m
+V_V6         VCC 15 0.95
+V_V7         VCC 12 0.95 
+V_V8         VEE 13 -0.95
+V_V9         VEE 16 -0.95
+V_V11        VCC 23 0.95 
+V_V12        VEE 24 -0.95
+V_V15        33 11 -2m    
+V_Vos        NINV 5 150u
+
+** Votlage Control Current Source **
+G_G1         VCM POSDRV 14 2 0.11
+G_G3         0 VCM 7 8 -0.03
+G_G2         VCM NEGDRV 14 2 -0.11
+
+********** Diodes ********** 
+.MODEL DIOD D IS=6.2E-15
+D_D1         POSDRV 12 DIOD
+D_D2         13 POSDRV DIOD 
+D_D3         NEGDRV 15 DIOD 
+D_D4         16 NEGDRV DIOD
+D_D5         VCM 23 DIOD 
+D_D6         24 VCM DIOD 
+D_D7         30 29 DIOD
+D_D8         27 31 DIOD 
+D_D9         11 26 DIOD
+D_D10        1 33 DIOD 
+ 
+********** Pole **********
+*R_X1RI       1X1 0  1E12
+R_X1R1       3X1 4X1  1Meg  
+R_X1R2       4X1 2X1  1Meg  
+C_X1C        2X1 4X1  3E-16 
+*R_X2RI       1x2 0  1E12  
+R_X2R1       3X2 4X2  1Meg  
+R_X2R2       4X2 2x2  1Meg  
+C_X2C        2X2 4X2  3E-16 
+  
+** Voltage Control Voltage Source **
+E_E1         0 3X1 1X1 0 1
+E_E2         2X1 0 0 4X1 1E6
+E_E3         0 3X2 1X2 0 1  
+E_E4         2X2 0 0 4X2 1E6
+
+********** Current Sources **********
+I_I1         22 VEE DC 100u  
+I_I2         10 VEE DC 112u  
+I_I3         VCC 27 DC 1m  
+I_I4         29 VEE DC 1m
+I_I5         VCC 1 DC 1m  
+I_I6         26 VEE DC 1m  
+
+.ENDS 
+
+
+
+*$
+
+
