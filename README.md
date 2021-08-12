@@ -1,5 +1,5 @@
-# opamp_book
+# 『LTspiceで動作を見ながらOPアンプ回路を理解する』サポートページ
 
-�wLTspice��OP�A���v��H�𗝉�����x�i���́j�̃T�|�[�g�T�C�g�ł��B
-LTspice��CAD�f�[�^����ѐ���������J���Ă��܂��B
+『[LTspiceで動作を見ながらOPアンプ回路を理解する―基本的な活用から実用に必須な理論まで](https://www.ohmsha.co.jp/book/9784274227509/)』（オーム社）のサポートサイトです。
+LTspiceのCADデータおよびお知らせ・正誤情報を公開しています。
 
